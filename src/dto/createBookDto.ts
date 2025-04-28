@@ -1,5 +1,4 @@
-export default class BookDTO {
-    id: string;
+export default class CreateBookDTO {
     title: string;
     author: Array<{ name: string; }>;
     isbn: number;

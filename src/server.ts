@@ -1,10 +1,10 @@
-import http from "http";
-import routes from "./routes";
+import dotenv from "dotenv";
+import app from "./app";
 
-const server = http.createServer((req, res) => {
-    routes.handle(req, res);
-});
+dotenv.config();
 
-server.listen(3000, () => {
-    console.log("Server running on port 3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 })

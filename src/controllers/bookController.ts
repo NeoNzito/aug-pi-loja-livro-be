@@ -1,29 +1,43 @@
-import { IncomingMessage, ServerResponse } from "http";
+import { Request, Response } from "express";
 import bookService from "../services/bookService";
+import CreateBookDTO from "../dto/createBookDto";
 
 
-const createBook = () => {
-
+const createBook = (req: Request, res: Response) => {
+    const book: CreateBookDTO = req.body;
+    const createdBook = bookService.createBook(book);
+    res.json(createdBook);
 }
 
-const getBooks = (req: IncomingMessage, res: ServerResponse) => {
+const getBooks = (req: Request, res: Response) => {
     const books = bookService.fetchBooks();
-    res.writeHead(200, { 'Content-Type': "application/json" });
-    res.end(JSON.stringify(books));
+    res.json(books);
 }
 
-const getOneBook = () => {
-
+const getOneBookById = (req: Request, res: Response) => {
+    const { id } = req.params;
+    const book = bookService.fetchOneBookById(id);
+    res.json(book);
 }
 
-const deleteOneBook = () => {
+const updateBook = (req: Request, res: Response) => {
+    const { id } = req.params;
+    const book: CreateBookDTO = req.body;
+    const updatedBook = bookService.updateBook(id, book);
+    res.json(updatedBook);
+}
 
+const deleteOneBook = (req: Request, res: Response) => {
+    const { id } = req.params;
+    const book = bookService.deleteOneBook(id);
+    res.json(book);
 }
 
 
 export default { 
     createBook,
     getBooks,
-    getOneBook,
+    getOneBookById,
+    updateBook,
     deleteOneBook,
 };
