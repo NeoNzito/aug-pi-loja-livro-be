@@ -5,12 +5,15 @@ import CreateBookDTO from "../dto/createBookDto";
 
 const createBook = (req: Request, res: Response) => {
     const book: CreateBookDTO = req.body;
+    console.log(book);
     const createdBook = bookService.createBook(book);
+    console.log(createdBook);
     res.json(createdBook);
 }
 
 const getBooks = (req: Request, res: Response) => {
     const books = bookService.fetchBooks();
+    console.log(books);
     res.json(books);
 }
 
