@@ -5,34 +5,33 @@ import CreateBookDTO from "../dto/createBookDto";
 
 const createBook = (req: Request, res: Response) => {
     const book: CreateBookDTO = req.body;
-    console.log(book);
     const createdBook = bookService.createBook(book);
-    console.log(createdBook);
     res.json(createdBook);
 }
 
 const getBooks = (req: Request, res: Response) => {
     const books = bookService.fetchBooks();
-    console.log(books);
     res.json(books);
 }
 
 const getOneBookById = (req: Request, res: Response) => {
-    const { id } = req.params;
-    const book = bookService.fetchOneBookById(id);
+    const { bookId } = req.params;
+    const book = bookService.fetchOneBookById(bookId);
     res.json(book);
 }
 
 const updateBook = (req: Request, res: Response) => {
-    const { id } = req.params;
-    const book: CreateBookDTO = req.body;
-    const updatedBook = bookService.updateBook(id, book);
+    const { bookId } = req.params;
+    const book = req.body;
+    console.log("Book: ", book);
+    const updatedBook = bookService.updateBook(bookId, book);
+    console.log("Updated Book: ", updatedBook);
     res.json(updatedBook);
 }
 
 const deleteOneBook = (req: Request, res: Response) => {
-    const { id } = req.params;
-    const book = bookService.deleteOneBook(id);
+    const { bookId } = req.params;
+    const book = bookService.deleteOneBook(bookId);
     res.json(book);
 }
 
